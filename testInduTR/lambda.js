@@ -1,23 +1,40 @@
 let AWS = require('aws-sdk');
-const kinesis = new AWS.Kinesis();
+const s3 = new AWS.S3();
 
 exports.handler = function (event, context, callback) {
-    kinesis.putRecord({
-        Data: '1',
-        PartitionKey: '1',
-        StreamName: 'my-kinesis'
+    s3.listObjects({
+        'Bucket': 'indunil.trigger',
+        'MaxKeys': 10,
+        'Prefix': '1'
     }).promise()
         .then(data => {
-            console.log("dataaa");
-            console.log(data);
-            // your logic goes here
+            console.log(data);         
+            console.log("dataaaa");
+              // successful response
+            /*
+            data = {
+                Contents: [
+                    {
+                       ETag: "\"70ee1738b6b21e2c8a43f3a5ab0eee71\"",
+                       Key: "example1.jpg",
+                       LastModified: "<Date Representation>",
+                       Owner: {
+                          DisplayName: "myname",
+                          ID: "12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc"
+                       },
+                       Size: 11,
+                       StorageClass: "STANDARD"
+                    },
+                    // {...}
+                ]
+            }
+            */
         })
         .catch(err => {
-            console.log("errrrrrr");
+            console.log(err, err.stack); // an error occurred
+            console.log("errorrr");
             console.log(err);
-            // error handling goes here
         });
-
 
     callback(null, { "message": "Successfully executed" });
 }
