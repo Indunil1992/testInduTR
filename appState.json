@@ -1,0 +1,159 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "c693e9b8-5d6a-413a-b557-ac7680ae652e": {
+        "id": "c693e9b8-5d6a-413a-b557-ac7680ae652e",
+        "parent": null,
+        "name": "testInduTR",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "0f3c924c-6c99-4f07-8c98-c3204709a8a9"
+        ],
+        "isRemovable": false,
+        "filePath": "testInduTR"
+      },
+      "0f3c924c-6c99-4f07-8c98-c3204709a8a9": {
+        "id": "0f3c924c-6c99-4f07-8c98-c3204709a8a9",
+        "parent": "c693e9b8-5d6a-413a-b557-ac7680ae652e",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "testInduTR/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.get({\n        TableName: 'table1',\n        Key: { '1': 1, '2': 2 }\n    }).promise()\n        .then((data) => {\n            console.log(data);\n            console.log(\"dataaaa\");\n            //your logic goes here\n        })\n        .catch((err) => {\n            console.log(err);\n             console.log(\"errrrrr\");\n            //handle error\n        });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "ddbtable1",
+            "config": {
+              "StartingPosition": "TRIM_HORIZON",
+              "BatchSize": "100",
+              "StreamViewType": "NEW_IMAGE"
+            }
+          }
+        ]
+      }
+    },
+    "rootNode": "c693e9b8-5d6a-413a-b557-ac7680ae652e",
+    "openFiles": [
+      "0f3c924c-6c99-4f07-8c98-c3204709a8a9"
+    ],
+    "currentFileId": "0f3c924c-6c99-4f07-8c98-c3204709a8a9",
+    "resources": {
+      "ddbtable1": {
+        "name": "ddbtable1",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "table": {
+            "arn": "",
+            "name": "table1",
+            "partitionKey": "1",
+            "partitionKeyType": "N",
+            "hasSortKey": true,
+            "sortKey": "2",
+            "sortKeyType": "B",
+            "payPerRequest": true,
+            "mode": 0
+          },
+          "isGlobalEditMode": false,
+          "parameters": {
+            "mode": 0,
+            "operation": "get",
+            "table": {
+              "arn": "",
+              "name": "table1",
+              "partitionKey": "1",
+              "partitionKeyType": "N",
+              "hasSortKey": true,
+              "sortKey": "2",
+              "sortKeyType": "B",
+              "payPerRequest": true,
+              "mode": 0
+            },
+            "isGlobalEditMode": false,
+            "parameters": {
+              "Key": {
+                "1": "1",
+                "2": "2"
+              },
+              "Item": {},
+              "ExpressionAttributeValues": {}
+            },
+            "triggerParams": {},
+            "validator": {
+              "validatableFields": {},
+              "validity": true
+            },
+            "valid": true,
+            "triggerConfig": {
+              "StartingPosition": "TRIM_HORIZON",
+              "BatchSize": "100",
+              "StreamViewType": "NEW_IMAGE"
+            },
+            "TableName": "table1"
+          },
+          "triggerParams": {
+            "StartingPosition": "TRIM_HORIZON",
+            "BatchSize": "100",
+            "StreamViewType": "NEW_IMAGE"
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "javascript",
+          "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "testInduTR",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "eu-west-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1568196898458
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "testInduTR",
+      "url": "https://github.com/Indunil1992/testInduTR"
+    }
+  }
+}
