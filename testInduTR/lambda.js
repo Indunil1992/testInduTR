@@ -1,19 +1,21 @@
 let AWS = require('aws-sdk');
-const ddb = new AWS.DynamoDB.DocumentClient();
+const kinesis = new AWS.Kinesis();
 
 exports.handler = function (event, context, callback) {
-    ddb.scan({
-        TableName: 'test1'
+    kinesis.putRecord({
+        Data: '1',
+        PartitionKey: '1',
+        StreamName: 'my-kinesis'
     }).promise()
-        .then((data) => {
-             console.log(data);
-              console.log("dataaa");
-            //your logic goes here
+        .then(data => {
+            console.log("dataaa");
+            console.log(data);
+            // your logic goes here
         })
-        .catch((err) => {
-             console.log(err);
-             console.log("faillll");
-            //handle error
+        .catch(err => {
+            console.log("errrrrrr");
+            console.log(err);
+            // error handling goes here
         });
 
 
