@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "testInduTR/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.get({\n        TableName: 'table2',\n        Key: { '3': '30', '4': '40' }\n    }).promise()\n        .then((data) => {\n             console.log(\"dataaaa\");\n              console.log(data);\n            //your logic goes here\n        })\n        .catch((err) => {\n             console.log(\"errrr\");\n              console.log(err);\n            //handle error\n        });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.get({\n        TableName: 'table2',\n        Key: {\n            '3': '3',\n            '4': '4'\n        }\n    }).promise()\n        .then((data) => {\n            console.log(\"dataaaa\");\n            console.log(data);\n            //your logic goes here\n        })\n        .catch((err) => {\n            console.log(\"errrr\");\n            console.log(err);\n            //handle error\n        });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -41,8 +41,8 @@
           }
         ],
         "testCases": {
-          "1e4a0f26-9229-4945-83b3-a2bea1e65e66": {
-            "id": "1e4a0f26-9229-4945-83b3-a2bea1e65e66",
+          "2d2343e9-e448-4235-bede-2451c5f3f2d9": {
+            "id": "2d2343e9-e448-4235-bede-2451c5f3f2d9",
             "name": "Test event",
             "functionId": "0f3c924c-6c99-4f07-8c98-c3204709a8a9",
             "event": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\",\r\n    \"key3\": \"value3\"\r\n}",
@@ -110,12 +110,11 @@
           },
           "isGlobalEditMode": false,
           "parameters": {
+            "TableName": "table2",
             "Key": {
-              "3": "30",
-              "4": "40"
-            },
-            "Item": {},
-            "ExpressionAttributeValues": {}
+              "3": "3",
+              "4": "4"
+            }
           },
           "triggerParams": {},
           "validator": {
@@ -159,7 +158,7 @@
     "projectRegion": "eu-west-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1568197542868
+    "lastSave": 1568197815018
   },
   "VCS_STATE": {
     "provider": "GitHub",
