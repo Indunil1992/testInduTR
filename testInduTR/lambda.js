@@ -3,17 +3,17 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
     ddb.get({
-        TableName: 'table1',
-        Key: { '1': 1, '2': 2 }
+        TableName: 'table2',
+        Key: { '3': '30', '4': '40' }
     }).promise()
         .then((data) => {
-            console.log(data);
-            console.log("dataaaa");
+             console.log("dataaaa");
+              console.log(data);
             //your logic goes here
         })
         .catch((err) => {
-            console.log(err);
-             console.log("errrrrr");
+             console.log("errrr");
+              console.log(err);
             //handle error
         });
 
