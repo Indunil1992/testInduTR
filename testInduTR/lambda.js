@@ -2,17 +2,17 @@ let AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
-    ddb.query({
-        TableName: 'sample1'
+    ddb.scan({
+        TableName: 'test1'
     }).promise()
         .then((data) => {
-             console.log("dataaa");
-              console.log(data);
+             console.log(data);
+              console.log("dataaa");
             //your logic goes here
         })
         .catch((err) => {
-             console.log("errrr");
-              console.log(err);
+             console.log(err);
+             console.log("faillll");
             //handle error
         });
 

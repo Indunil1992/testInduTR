@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "testInduTR/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.query({\n        TableName: 'sample1'\n    }).promise()\n        .then((data) => {\n             console.log(\"dataaa\");\n              console.log(data);\n            //your logic goes here\n        })\n        .catch((err) => {\n             console.log(\"errrr\");\n              console.log(err);\n            //handle error\n        });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.scan({\n        TableName: 'test1'\n    }).promise()\n        .then((data) => {\n             console.log(data);\n              console.log(\"dataaa\");\n            //your logic goes here\n        })\n        .catch((err) => {\n             console.log(err);\n             console.log(\"faillll\");\n            //handle error\n        });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -32,17 +32,17 @@
         },
         "triggers": [
           {
-            "resourceName": "ddbsample1",
+            "resourceName": "ddbtest1",
             "config": {
-              "StartingPosition": "LATEST",
+              "StartingPosition": "TRIM_HORIZON",
               "BatchSize": "100",
-              "StreamViewType": "KEYS_ONLY"
+              "StreamViewType": "NEW_IMAGE"
             }
           }
         ],
         "testCases": {
-          "2d2343e9-e448-4235-bede-2451c5f3f2d9": {
-            "id": "2d2343e9-e448-4235-bede-2451c5f3f2d9",
+          "d47146ce-5de1-429a-a745-6b984f4354c3": {
+            "id": "d47146ce-5de1-429a-a745-6b984f4354c3",
             "name": "Test event",
             "functionId": "0f3c924c-6c99-4f07-8c98-c3204709a8a9",
             "event": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\",\r\n    \"key3\": \"value3\"\r\n}",
@@ -57,15 +57,15 @@
     ],
     "currentFileId": "0f3c924c-6c99-4f07-8c98-c3204709a8a9",
     "resources": {
-      "ddbsample1": {
-        "name": "ddbsample1",
+      "ddbtest1": {
+        "name": "ddbtest1",
         "type": "DynamoDB",
         "config": {
           "mode": 0,
-          "operation": "query",
+          "operation": "scan",
           "table": {
             "arn": "",
-            "name": "sample1",
+            "name": "test1",
             "partitionKey": "1",
             "partitionKeyType": "S",
             "hasSortKey": false,
@@ -122,7 +122,7 @@
     "projectRegion": "eu-west-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1568198151634
+    "lastSave": 1568198812155
   },
   "VCS_STATE": {
     "provider": "GitHub",
